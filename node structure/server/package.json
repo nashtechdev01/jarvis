@@ -1,0 +1,21 @@
+{
+  "name": "Test",
+  "version": "0.0.1",
+  "description": "",
+  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.com/thienn/a1node.git"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.1",
+    "express": "^4.13.4",
+    "mongodb": "^2.2.5",
+    "path": "^0.12.7",
+    "socket.io": "^1.4.8",
+    "q": "^1.4.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.10.0"
+  }
+}

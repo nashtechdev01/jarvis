@@ -1,0 +1,42 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>React Chatbox</title>
+    <meta name="description" content="React Chatbox">
+    <meta name="author" content="Internet">
+
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+    <div class="chat-box">
+        <input type="checkbox">
+        <label data-expanded="Close Chatbox" data-collapsed="Open Chatbox"></label>
+        <div class="chat-box-content">
+            <div class="chat-log">
+                <p class="message">
+                    <span class="name">A Person</span>
+                    <span class="content">Are you a mother fucking bot?</span>
+                </p>
+                 <p class="message">
+                    <span class="name">A Bot</span>
+                    <span class="content">Yes, what the fuck do you want?</span>
+                </p>
+            </div>
+            <hr>
+            <div class="input-message">
+                <textarea name="message" id="message" cols="30" rows="10" placeholder="Enter a message..."></textarea>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
