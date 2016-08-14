@@ -1,5 +1,4 @@
 'use strict';
-var db = require('../database/dbConnection');
 var q = require('q');
 var dbCon = require('../database/dbConnection');
 module.exports = {
@@ -23,8 +22,7 @@ module.exports = {
             });
         return self.deferred.promise;
     },
-    // obj {name, content}
-    addMessage: function (obj) {
+    addMessage: function (obj) {  // obj {name, content}
         var self = this;
         self.deferred = q.defer();
         var connection = null;

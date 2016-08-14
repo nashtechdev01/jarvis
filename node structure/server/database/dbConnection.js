@@ -2,8 +2,10 @@
 var mongodb = require('mongodb');
 var q = require('q');
 var MongoClient = mongodb.MongoClient;
+var config = require('config');
+var dbConfig = config.get('dbConfig');
 
-var url = 'mongodb://localhost:27017/testdb';
+var url = 'mongodb://' + dbConfig.host + ':' + dbConfig.port + '/' + dbConfig.dbName;
 module.exports = {
   getConnection: function () {
     var self = this;
