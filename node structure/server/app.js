@@ -27,13 +27,19 @@ app.use(function (err, req, res, next) {
 });
 
 io.on('connection', function (socket) {
+    this.pushNotificationInterval = setInterval(function(){
+      console.log('push notification');
+      socket.emit('push-notification', 'Sample notification every 10s.');
+    }, 10000);
     console.log('a user connected');
     socket.on('disconnect', function () {
         console.log('user disconnected');
+        clearInterval(this.pushNotificationInterval);
     });
     socket.on('chat message', function (msg) {
         socket.broadcast.emit('chat message', msg);
     });
+
 });
 
 http.listen(3000, function () {
