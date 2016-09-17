@@ -16,7 +16,7 @@
     "q": "^1.4.1",
     "socket.io": "^1.4.8",
     "google-search":"",
-    "kafka-node":""
+    "kafka-node":"",
     "text-miner": "~1.0.5",
     "underscore": "^1.8.3"
   },
