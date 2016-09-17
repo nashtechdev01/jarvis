@@ -16,10 +16,10 @@ module.exports = function() {
         }
     );
 
-    consumer.on('message', function (kafkaMessage) {
+    consumer.on('message', function (kafkaMessage, callback) {
         console.log('Received message ' + kafkaMessage.value);
         googleSearch = new GoogleSearchClass();
-        googleSearch.crawGoogleSearch(kafkaMessage.value);
+        googleSearch.crawGoogleSearch(kafkaMessage.value, callback);
         //var message = JSON.parse(kafkaMessage.value);
         //chatServer.broadcast(message);
     });

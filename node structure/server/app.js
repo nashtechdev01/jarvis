@@ -43,9 +43,10 @@ io.on('connection', function (socket) {
     });
 
     socket.on('get message', function (msg) {
+
         var textMiner = new TextMiner([msg]);
         textMiner.tidy();
-        
+
         var words =  textMiner.terms.vocabulary;
 
         // Insert question.
@@ -56,6 +57,10 @@ io.on('connection', function (socket) {
         })
         .catch(function(err) {
             console.log('errr')
+        });
+        var request = messageService.getMessages(msg);
+        request.then(function (answers) {
+            socket.emit('chat message', answers);
         });
     });
 });

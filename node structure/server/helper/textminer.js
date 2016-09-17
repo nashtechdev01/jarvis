@@ -6,6 +6,7 @@ var tm = require('text-miner');
 
 var TextMiner = function (docs) {
   this.corpus = new tm.Corpus(docs);
+  this.tidy();
 };
 
 TextMiner.prototype.tidy = function() {
@@ -16,10 +17,14 @@ TextMiner.prototype.tidy = function() {
     .removeInterpunctuation()
     .removeNewlines()
     .removeWords(tm.STOPWORDS.EN);
+};
 
+TextMiner.prototype.weighting = function (customFuncs) {
+  customFuncs = customFuncs || [];
   this.terms = new tm.Terms(this.corpus);
+
+  // TODO: Weighting with customFuncs
   console.log(this.terms.vocabulary);
   console.log(this.terms.dtm);
 };
-
 module.exports = TextMiner;

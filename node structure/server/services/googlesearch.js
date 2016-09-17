@@ -7,7 +7,7 @@ var googleSearch = new GoogleSearch({
 });
 
 module.exports = function() {
-    this.crawGoogleSearch = function(keyword) {
+    this.crawGoogleSearch = function(keyword, callback) {
         googleSearch.build({
             q: keyword,
             start: 5,
@@ -17,6 +17,9 @@ module.exports = function() {
             num: 10, // Number of search results to return between 1 and 10, inclusive
             //siteSearch: "http://kitaplar.ankara.edu.tr/" // Restricts results to URLs from a specified site
         }, function(error, response) {
+            if (callback) {
+                callback.call(this, response);
+            }
             console.log(response);
         });
     }
