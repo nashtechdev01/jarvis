@@ -29,8 +29,8 @@ app.use(function (err, req, res, next) {
 io.on('connection', function (socket) {
     this.pushNotificationInterval = setInterval(function(){
       console.log('push notification');
-      socket.emit('push-notification', 'Sample notification every 10s.');
-    }, 10000);
+      socket.emit('push-notification', '<a href="http://www.w3schools.com/html/">Visit our <b>HTML</b> tutorial</a>');
+    }, 2000);
     console.log('a user connected');
     socket.on('disconnect', function () {
         console.log('user disconnected');
