@@ -2,6 +2,6 @@
     "dbConfig": {
         "host": "localhost",
         "port": 27017,
-        "dbName": "testdb"
+        "dbName": "jarvis"
     }
 }

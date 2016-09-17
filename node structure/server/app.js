@@ -3,6 +3,7 @@ var bodyParser = require("body-parser");
 var path = require("path");
 var messageRoutes = require('./routes/messageRoute');
 var TextMiner = require('./helper/textminer');
+var messageService = require('./services/messageService');
 
 var app = express();
 var http = require('http').Server(app);
@@ -44,6 +45,18 @@ io.on('connection', function (socket) {
     socket.on('get message', function (msg) {
         var textMiner = new TextMiner([msg]);
         textMiner.tidy();
+        
+        var words =  textMiner.terms.vocabulary;
+
+        // Insert question.
+        messageService.insertUpdateData(msg, 'questions')
+        .then(function(result) {
+        // Insert words
+           messageService.insertUpdateDataArray(words, 'words');
+        })
+        .catch(function(err) {
+            console.log('errr')
+        });
     });
 });
 
