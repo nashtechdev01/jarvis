@@ -59,6 +59,7 @@ var ChatInput = React.createClass({
         if (keyCode == 13) {
             this.setState({content: ''});
             this.props.addMessage({content: this.state.content, from: 0});
+            this.props.sendMessage(this.state.content);
         }
     },
     handleChange: function (e) {
@@ -123,8 +124,10 @@ var ChatBox = React.createClass({
         var objDiv = document.getElementById("msg_body");
         objDiv.scrollTop = objDiv.scrollHeight;
     },
-    sendMessage: function (callback) { // callback: function.
+    sendMessage: function (message) { // callback: function.
         // Implement to send ajax message to server using this.props.url
+        var socket = this.props.socket;
+        socket.emit('get message', message);
     },
     initSocket: function () { // Init socket to listen from server.
         var self = this;
@@ -152,7 +155,7 @@ var ChatBox = React.createClass({
                 <ChatHeader title={this.props.config.title}/>
                 <div className="msg_wrap">
                     <ChatContent messages={this.state.messages}/>
-                    <ChatInput addMessage={this.addMessage}/>
+                    <ChatInput addMessage={this.addMessage} sendMessage={this.sendMessage}/>
                 </div>
             </div>
         );

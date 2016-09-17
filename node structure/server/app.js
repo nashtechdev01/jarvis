@@ -2,6 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
 var messageRoutes = require('./routes/messageRoute');
+var TextMinerService = require('./services/textminingService');
 
 var app = express();
 var http = require('http').Server(app);
@@ -40,6 +41,10 @@ io.on('connection', function (socket) {
         socket.broadcast.emit('chat message', msg);
     });
 
+    socket.on('get message', function (msg) {
+        var textMiner = new TextMinerService([msg]);
+        textMiner.tidy();
+    });
 });
 
 http.listen(3000, function () {
