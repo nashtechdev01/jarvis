@@ -2,7 +2,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var path = require("path");
 var messageRoutes = require('./routes/messageRoute');
-var TextMinerService = require('./services/textminingService');
+var TextMiner = require('./helper/textminer');
 
 var app = express();
 var http = require('http').Server(app);
@@ -28,10 +28,10 @@ app.use(function (err, req, res, next) {
 });
 
 io.on('connection', function (socket) {
-    this.pushNotificationInterval = setInterval(function(){
-      console.log('push notification');
-      socket.emit('push-notification', '<a href="http://www.w3schools.com/html/">Visit our <b>HTML</b> tutorial</a>');
-    }, 2000);
+    //this.pushNotificationInterval = setInterval(function(){
+    //  console.log('push notification');
+    //  socket.emit('push-notification', '<a href="http://www.w3schools.com/html/">Visit our <b>HTML</b> tutorial</a>');
+    //}, 2000);
     console.log('a user connected');
     socket.on('disconnect', function () {
         console.log('user disconnected');
@@ -42,7 +42,7 @@ io.on('connection', function (socket) {
     });
 
     socket.on('get message', function (msg) {
-        var textMiner = new TextMinerService([msg]);
+        var textMiner = new TextMiner([msg]);
         textMiner.tidy();
     });
 });
