@@ -20,7 +20,6 @@ module.exports = function() {
             if (callback) {
                 callback.call(this, response);
             }
-            console.log(response);
         });
     }
 }

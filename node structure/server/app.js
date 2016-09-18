@@ -9,7 +9,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 // Allow cross domain.
 app.use(function (req, res, next) {
@@ -25,7 +25,7 @@ app.use('/api/messages/', messageRoutes);
 app.use(function (err, req, res, next) {
     res.status(err.status || 500);
     console.log(err);
-    res.json({ "error": err.message });
+    res.json({"error": err.message});
 });
 
 io.on('connection', function (socket) {
@@ -43,24 +43,24 @@ io.on('connection', function (socket) {
     });
 
     socket.on('get message', function (msg) {
-
+        var self = this;
+        self.socket = socket;
         var textMiner = new TextMiner([msg]);
-        textMiner.tidy();
-
-        var words =  textMiner.terms.vocabulary;
+        var words = textMiner.getTerms().vocabulary;
 
         // Insert question.
         messageService.insertUpdateData(msg, 'questions')
-        .then(function(result) {
-        // Insert words
-           messageService.insertUpdateDataArray(words, 'words');
-        })
-        .catch(function(err) {
-            console.log('errr')
-        });
+            .then(function (result) {
+                // Insert words
+                messageService.insertUpdateDataArray(words, 'words');
+            })
+            .catch(function (err) {
+                console.log('errr')
+            });
+
         var request = messageService.getMessages(msg);
         request.then(function (answers) {
-            socket.emit('chat message', answers);
+            self.socket.emit('push-notification', answers);
         });
     });
 });

@@ -20,11 +20,16 @@ TextMiner.prototype.tidy = function() {
 };
 
 TextMiner.prototype.weighting = function (customFuncs) {
-  customFuncs = customFuncs || [];
-  this.terms = new tm.Terms(this.corpus);
+    customFuncs = customFuncs || [];
+    this.terms = new tm.Terms(this.corpus);
 
-  // TODO: Weighting with customFuncs
-  console.log(this.terms.vocabulary);
-  console.log(this.terms.dtm);
+    // TODO: Weighting with customFuncs
+    console.log(this.terms.vocabulary);
+    console.log(this.terms.dtm);
 };
+
+TextMiner.prototype.getTerms = function () {
+    return (new tm.Terms(this.corpus));
+};
+
 module.exports = TextMiner;
