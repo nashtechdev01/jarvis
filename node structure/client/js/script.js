@@ -1,4 +1,4 @@
 ReactDOM.render(
-    <ChatBox config = { {title: 'Chat box', url: ''} } socket = {new io()}/>,
+    <ChatBox config = { {title: 'Jarvis', url: ''} } socket = {new io()}/>,
     document.getElementById('content')
 );

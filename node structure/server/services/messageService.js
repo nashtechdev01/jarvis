@@ -144,7 +144,7 @@ module.exports = {
     googleResultToHtml: function (result) {
         var html = '';
         // Get Title;
-        html += '<a href="'+ result.link + '">' + result.title + '</a>';
+        html += '<a href="'+ result.link + '" target="_blank">' + result.title + '</a>';
         return html;
     }
 };
